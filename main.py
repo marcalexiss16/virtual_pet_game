@@ -67,3 +67,12 @@ def get_mood():
         return "happy"
 
     return "neutral"
+
+talk_label = tk.Label(
+    root,
+    text="",
+    bg="#fff0f5",
+    font=("Arial", 10, "bold")
+)
+
+talk_label.pack()
