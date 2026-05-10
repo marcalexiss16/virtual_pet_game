@@ -80,3 +80,14 @@ talk_label.pack()
 challenge_label.config(
     text="Challenge Complete!",
     fg="green")
+
+
+def animate_pet():
+    pet_label.config(text="(•‿•)")
+    root.after(300,
+        lambda: pet_label.config(
+            text=faces[get_mood()]
+        )
+    )
+
+    root.after(4000, animate_pet)
