@@ -1,60 +1,49 @@
-import random
+# Difficulty
+difficulty = "Normal"
 
-# Challenge variables
-challenge_active = False
+settings = {
+    "Easy": 1,
+    "Normal": 2,
+    "Hard": 4
+}
 
-challenges = [
-    {"msg": "Press FEED!", "action": "feed"},
-    {"msg": "Press PLAY!", "action": "play"},
-    {"msg": "Press SLEEP!", "action": "sleep"}
-]
+# Difficulty menu
+difficulty_var = tk.StringVar(value="Normal")
 
-# Challenge label
-challenge_label = tk.Label(
-    root,
-    text="",
-    font=("Arial", 10, "bold"),
-    bg="#fff0f5"
-)
+def change_difficulty(choice):
+    global difficulty
 
-challenge_label.pack(pady=5)
+    difficulty = choice
 
-# Functions
-def start_challenge():
-    global challenge_active
-    global current_challenge
-
-    challenge_active = True
-
-    current_challenge = random.choice(challenges)
-
-    challenge_label.config(
-        text=current_challenge["msg"],
-        fg="red"
+    msg_label.config(
+        text=f"{choice} mode selected."
     )
 
-def check_challenge(action):
-    global challenge_active
+difficulty_menu = tk.OptionMenu(
+    root,
+    difficulty_var,
+    "Easy",
+    "Normal",
+    "Hard",
+    command=change_difficulty
+)
 
-    if challenge_active:
-        if current_challenge["action"] == action:
+difficulty_menu.pack()
 
-            challenge_active = False
+# Time system
+def time_passing():
+    global hunger, happiness, energy
 
-            challenge_label.config(
-                text="Challenge Complete!",
-                fg="green"
-            )
+    decay = settings[difficulty]
 
-# Add inside functions
-# feed()
-check_challenge("feed")
+    hunger = max(0, hunger - decay)
+    happiness = max(0, happiness - 1)
+    energy = max(0, energy - 1)
 
-# play()
-check_challenge("play")
+    hunger_bar["value"] = hunger
+    happiness_bar["value"] = happiness
+    energy_bar["value"] = energy
 
-# sleep()
-check_challenge("sleep")
+    root.after(3000, time_passing)
 
-# Start challenge
-root.after(5000, start_challenge)
+time_passing()
