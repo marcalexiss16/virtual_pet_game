@@ -1,30 +1,60 @@
-# Add this below the pet label
+import random
 
-msg_label = tk.Label(
+# Challenge variables
+challenge_active = False
+
+challenges = [
+    {"msg": "Press FEED!", "action": "feed"},
+    {"msg": "Press PLAY!", "action": "play"},
+    {"msg": "Press SLEEP!", "action": "sleep"}
+]
+
+# Challenge label
+challenge_label = tk.Label(
     root,
     text="",
-    bg="#fff0f5",
-    font=("Arial", 10)
+    font=("Arial", 10, "bold"),
+    bg="#fff0f5"
 )
 
-msg_label.pack()
+challenge_label.pack(pady=5)
 
-# Update functions
+# Functions
+def start_challenge():
+    global challenge_active
+    global current_challenge
 
-def feed():
-    global hunger
-    hunger = min(100, hunger + 10)
-    hunger_bar["value"] = hunger
-    msg_label.config(text="Pet was fed.")
+    challenge_active = True
 
-def play():
-    global happiness
-    happiness = min(100, happiness + 10)
-    happiness_bar["value"] = happiness
-    msg_label.config(text="Pet played.")
+    current_challenge = random.choice(challenges)
 
-def sleep():
-    global energy
-    energy = min(100, energy + 10)
-    energy_bar["value"] = energy
-    msg_label.config(text="Pet is sleeping.")
+    challenge_label.config(
+        text=current_challenge["msg"],
+        fg="red"
+    )
+
+def check_challenge(action):
+    global challenge_active
+
+    if challenge_active:
+        if current_challenge["action"] == action:
+
+            challenge_active = False
+
+            challenge_label.config(
+                text="Challenge Complete!",
+                fg="green"
+            )
+
+# Add inside functions
+# feed()
+check_challenge("feed")
+
+# play()
+check_challenge("play")
+
+# sleep()
+check_challenge("sleep")
+
+# Start challenge
+root.after(5000, start_challenge)
