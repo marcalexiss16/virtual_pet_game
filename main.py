@@ -47,3 +47,23 @@ def time_passing():
     root.after(3000, time_passing)
 
 time_passing()
+
+
+faces = {
+    "happy": "(^‿^)",
+    "neutral": "(-.-)",
+    "hungry": "(>_<)",
+    "sleepy": "(-_-)zzz"
+}
+
+def get_mood():
+    if hunger < 20:
+        return "hungry"
+
+    if energy < 20:
+        return "sleepy"
+
+    if hunger > 60 and happiness > 60:
+        return "happy"
+
+    return "neutral"
