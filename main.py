@@ -91,3 +91,19 @@ def animate_pet():
     )
 
     root.after(4000, animate_pet)
+
+
+def show_heart():
+    heart = tk.Label(
+        root,
+        text="💖",
+        font=("Arial", 14),
+        bg="#fff0f5"
+    )
+
+    heart.place(
+        x=random.randint(120, 240),
+        y=230
+    )
+
+    root.after(800, heart.destroy)
