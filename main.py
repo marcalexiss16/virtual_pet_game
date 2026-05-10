@@ -76,3 +76,7 @@ talk_label = tk.Label(
 )
 
 talk_label.pack()
+
+challenge_label.config(
+    text="Challenge Complete!",
+    fg="green")
