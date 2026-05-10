@@ -107,3 +107,10 @@ def show_heart():
     )
 
     root.after(800, heart.destroy)
+
+
+    idle_msgs = [
+    "Play with me!",
+    "I'm sleepy...",
+    "Don't ignore me!"
+]
